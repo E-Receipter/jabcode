@@ -1,0 +1,5 @@
+src/test*
+src/jabcodeReader/bin/**
+src/jabcodeWriter/bin/**
+*.o
+*.a
