@@ -34,6 +34,8 @@ Step 3: Build the JAB Code reader by running make command in `src/jabcodeReader`
 
 The built library can be found in `src/jabcode/build`. The built reader and writer applications can be found in `src/jabcodeReader/bin` and `src/jabcodeWriter/bin`.
 
+Writer and Reader require libtiff,libpng and zlib.
+
 ## Usage
 The usage of jabcodeWriter and jabcodeReader can be obtained by running the programs with the argument `--help`.
 
