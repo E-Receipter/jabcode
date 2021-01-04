@@ -4,7 +4,34 @@
       <meta charset="utf-8">
    </head>
    <body>
+      <canvas id="canvas"></canvas>
       <div id="textcontent"></div>
-      <script src="jabcode.js"></script>
+      <script src="build/jabcode.js"></script>
+      <script>
+      let imgSrc= "test.png";
+      var canvas = document.getElementById("canvas")
+      var ctx = canvas.getContext("2d");
+      var image = new Image();
+      image.onload = loadImage;
+      image.src = imgSrc;
+      function loadImage(){
+         scaling = 0.75;
+         canvas.width = this.naturalWidth*scaling;
+         canvas.height = this.naturalHeight*scaling;
+         ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+      }
+      function getImage(){
+         return ctx.getImageData(0,0,canvas.width,canvas.height);
+      }
+      function loadBitMap(ImageData){
+         data = new Float32Array(ImageData.data.buffer)
+         length = canvas.width*canvas.height;
+         bitmap_ptr = Module._createJabBitmap(canvas.width,canvas.height,length)
+         pixel_array_ptr = Module._getPixelArray(bitmap_ptr)
+         pixel_array = new Float32Array(Module.HEAPF32.buffer,pixel_array_ptr,length)
+         pixel_array.set(data)
+         return bitmap_ptr
+      }
+      </script>
    </body>
 </html>

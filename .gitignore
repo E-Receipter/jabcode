@@ -3,3 +3,8 @@ src/jabcodeReader/bin/**
 src/jabcodeWriter/bin/**
 *.o
 *.a
+*.out
+**/build/**
+!**/build/.gitkeep
+**/bin/**
+!**/bin/.gitkeep
