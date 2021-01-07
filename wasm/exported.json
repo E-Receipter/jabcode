@@ -5,7 +5,7 @@
     "_getPixelLength",
     "_decode",
     "_getData",
-    "_getLength",
+    "_getDataLength",
     "_getTrimmed",
     "_free"
 ]

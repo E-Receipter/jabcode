@@ -34,16 +34,16 @@ jab_int64 getPixelLength(jab_bitmap* bitmap) {
 jab_data* decode(jab_bitmap *bitmap){
     jab_int32 decode_status;
 	jab_decoded_symbol symbols[MAX_SYMBOL_NUMBER];
-    for(int i=0;i<10;i++){printf("%d,",bitmap->pixel[i]);}
-    printf("\n");
-    printf("%d %d\n",bitmap->height,bitmap->width);
+    // for(int i=0;i<10;i++){printf("%d,",bitmap->pixel[i]);}
+    // printf("\n");
+    // printf("%d %d\n",bitmap->height,bitmap->width);
     return decodeJABCodeEx(bitmap, NORMAL_DECODE, &decode_status, symbols, MAX_SYMBOL_NUMBER);
 }
 
 jab_char* getData(jab_data *data){
     return data -> data;
 }
-jab_int32 getLength(jab_data *data){
+jab_int32 getDataLength(jab_data *data){
     return data -> length;
 }
 
