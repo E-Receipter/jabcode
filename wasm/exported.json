@@ -1,8 +1,11 @@
 [
     "_createJabBitmap",
     "_getPixelArray",
+    "_getPixelWidth",
+    "_getPixelLength",
     "_decode",
     "_getData",
     "_getLength",
+    "_getTrimmed",
     "_free"
 ]

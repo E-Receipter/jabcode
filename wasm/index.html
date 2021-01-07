@@ -8,14 +8,14 @@
       <div id="textcontent"></div>
       <script src="build/jabcode.js"></script>
       <script>
-      let imgSrc= "test.png";
+      let imgSrc= "../src/test.png";
       var canvas = document.getElementById("canvas")
       var ctx = canvas.getContext("2d");
       var image = new Image();
       image.onload = loadImage;
       image.src = imgSrc;
       function loadImage(){
-         scaling = 0.75;
+         scaling = 1;
          canvas.width = this.naturalWidth*scaling;
          canvas.height = this.naturalHeight*scaling;
          ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
@@ -24,13 +24,22 @@
          return ctx.getImageData(0,0,canvas.width,canvas.height);
       }
       function loadBitMap(ImageData){
-         data = new Float32Array(ImageData.data.buffer)
-         length = canvas.width*canvas.height;
-         bitmap_ptr = Module._createJabBitmap(canvas.width,canvas.height,length)
+         data = new Uint8Array(ImageData.data.buffer);
+         bitmap_ptr = Module._createJabBitmap(canvas.width,canvas.height)
          pixel_array_ptr = Module._getPixelArray(bitmap_ptr)
-         pixel_array = new Float32Array(Module.HEAPF32.buffer,pixel_array_ptr,length)
+         pixel_array = new Uint8Array(Module.HEAPU8.buffer,pixel_array_ptr,data.byteLength)
          pixel_array.set(data)
          return bitmap_ptr
+      }
+      function decode(){
+         imgData = getImage()
+         bitmap_ptr = loadBitMap(imgData)
+         return Module._decode(bitmap_ptr)
+      }
+      function getTrimmed(bitmap_ptr,channel){
+         trimmed_ptr = Module._getTrimmed(bitmap_ptr,channel)
+         trimmed = new Uint8ClampedArray(new Uint8Array(Module.HEAPU8.buffer,trimmed_ptr,Module._getPixelLength(bitmap_ptr)*4))
+         return new ImageData(trimmed,Module._getPixelWidth(bitmap_ptr))
       }
       </script>
    </body>
